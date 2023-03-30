@@ -18,39 +18,40 @@ const generateTotalCompChoices = (optionPoolSizePercent, optionsLockedForAdvisor
                                   totalCompanySharesCount, currentCompanyValuationInMillions, baseAnnualSalaryInUSD) => {
     const optionPoolSize = optionPoolSizePercent / 100 * totalCompanySharesCount;
 
-    const optionsLockedForAdvisors = optionsLockedForAdvisorsOutOfPoolInPercentage / 100 * totalCompanySharesCount;
+    const optionsLockedForAdvisors = optionsLockedForAdvisorsOutOfPoolInPercentage / 100 * optionPoolSize;
 
     const optionsAvailableForEmployees = optionPoolSize - optionsLockedForAdvisors;
 
-    const percent_from_company_shares = optionsAvailableForEmployees / totalCompanySharesCount * 100;
-
-    const minSalary = baseAnnualSalaryInUSD * 0.7;
-    const maxSalary = baseAnnualSalaryInUSD * 1.3;
+    const minSalary = baseAnnualSalaryInUSD * 0.8;
+    const maxSalary = baseAnnualSalaryInUSD * 1.2;
 
     const lowerCashBiggerOptionGrossSalary = minSalary;
-    const lowerCashBiggerOptionOptionsCount = Math.max(percent_from_company_shares * 1.5, 1);
+    const lowerCashBiggerOptionOptionsCount = Math.floor(optionsAvailableForEmployees * 0.065);
+    const lowerCashBiggerOptionInCompanyCapital = lowerCashBiggerOptionOptionsCount / totalCompanySharesCount * 100;
 
     const balancedCashBalancedOptionGrossSalary = baseAnnualSalaryInUSD;
-    const balancedCashBalancedOptionOptionsCount = percent_from_company_shares;
+    const balancedCashBalancedOptionOptionsCount = Math.floor(optionsAvailableForEmployees * 0.050);
+    const balancedCashBalancedOptionInCompanyCapital = balancedCashBalancedOptionOptionsCount / totalCompanySharesCount * 100;
 
     const biggerCashLowerOptionsGrossSalary = maxSalary;
-    const biggerCashLowerOptionsOptionsCount = Math.max(percent_from_company_shares / 2, 1);
+    const biggerCashLowerOptionsOptionsCount = Math.floor(optionsAvailableForEmployees * 0.035);
+    const biggerCashLowerOptionsInCompanyCapital = biggerCashLowerOptionsOptionsCount / totalCompanySharesCount * 100;
 
     return [{
         "name": "Lower Cash, Bigger Options",
         "salary": lowerCashBiggerOptionGrossSalary,
         "options": lowerCashBiggerOptionOptionsCount,
-        "options_percent_in_company_capital": 0 //TODO
+        "options_percent_in_company_capital": lowerCashBiggerOptionInCompanyCapital
     }, {
         "name": "Balanced Cash, Balanced Options",
         "salary": balancedCashBalancedOptionGrossSalary,
         "options": balancedCashBalancedOptionOptionsCount,
-        "options_percent_in_company_capital": 0 //TODO
+        "options_percent_in_company_capital": balancedCashBalancedOptionInCompanyCapital
     }, {
         "name": "Bigger Cash, Lower Options",
         "salary": biggerCashLowerOptionsGrossSalary,
         "options": biggerCashLowerOptionsOptionsCount,
-        "options_percent_in_company_capital": 0 //TODO
+        "options_percent_in_company_capital": biggerCashLowerOptionsInCompanyCapital
     }];
 };
 
