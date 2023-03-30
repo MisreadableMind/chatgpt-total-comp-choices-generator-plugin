@@ -9,7 +9,7 @@ servers:
 paths:
   /totalCompChoices:
     post:
-      summary: Calculate total compensation choices
+      summary: Calculate total compensation choices for employee
       requestBody:
         required: true
         content:
