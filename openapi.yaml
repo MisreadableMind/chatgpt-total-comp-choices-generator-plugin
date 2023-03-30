@@ -1,0 +1,55 @@
+openapi: 3.0.1
+info:
+  title: Total Comp choices Generator
+  description: Plugin for generating total comp options for candidate (gross salary + option plan).
+  version: 'v1'
+servers:
+  # product: https://<YOUR_REPO>.<YOUR_OWNER>.repl.co
+  - url: http://localhost:3001
+paths:
+  /totalCompChoices:
+    post:
+      summary: Calculate total compensation choices
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                option_pool_size_percent:
+                  type: number
+                  example: 10
+                options_locked_for_advisors_out_of_pool_in_percentage:
+                  type: number
+                  example: 2
+                total_company_shares_count:
+                  type: integer
+                  example: 1000000
+                current_company_valuation_in_millions:
+                  type: number
+                  example: 5
+                base_annual_salary_in_usd:
+                  type: integer
+                  example: 100000
+      responses:
+        '200':
+          description: Successful calculation of total compensation choices
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  choices:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        salary:
+                          type: number
+                        options:
+                          type: number
+                        options_percent_in_company_capital:
+                          type: number

@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Total Comp Generator(service http)",
+  "name_for_model": "total_comp_generator",
+  "description_for_human": "Plugin for generating total comp options for candidate (gross salary + option plan).",
+  "description_for_model": "Plugin for generating total comp options for candidate (gross salary + option plan). First option always has less cash and more options, second one balanced cash/options, third one cash on top and options is low.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "http://localhost:3001/openapi.yaml",
+    "is_user_authenticated": false
+  },
+  "logo_url": "http://localhost:3001/logo.png",
+  "contact_email": "support@example.com",
+  "legal_info_url": "http://www.example.com/legal"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "chatgpt-total-comp-choices",
+  "version": "1.0.0",
+  "description": "ChatGPT Plugin for Total Comp Choices generator",
+  "author": "v.ratyshnij@gmail.com",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
